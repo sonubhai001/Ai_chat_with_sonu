@@ -6,7 +6,13 @@ import time
 import json
 
 # Load API key 
-API_KEY ="s5k-or-v1-3f45082256522b517957798bd7ba0a5683bf98e527b5066bc6c24e099185621"
+# app.py ki line 9-13 ko aise karein:
+if "OPENROUTER_API_KEY" in st.secrets:
+    API_KEY = st.secrets["OPENROUTER_API_KEY"]
+else:
+    load_dotenv()
+    API_KEY = os.getenv("OPENROUTER_API_KEY")
+
 
 st.set_page_config(
     page_title="AI Chat Assistant", 
@@ -126,8 +132,8 @@ if prompt := st.chat_input("Type your message here..."):
                 headers = {
                     "Authorization": f"Bearer {API_KEY}",
                     "Content-Type": "application/json",
-                    "HTTP-Referer": "http://localhost:8501",  # Required by OpenRouter
-                    "X-Title": "AI Chat Assistant"  # Required by OpenRouter
+                    "HTTP-Referer": "https://sonuai.streamlit.app", # Apna sahi URL yahan daalein
+                    "X-Title": "AI Chat Assistant"
                 }
                 
                 # Prepare request data
@@ -230,6 +236,7 @@ with st.expander("ℹ️ Help & Information"):
         st.markdown("- [Get API Key](https://openrouter.ai/keys)")
 
         st.markdown("- [Add Credits](https://openrouter.ai/settings)")
+
 
 
 
