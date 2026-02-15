@@ -8,9 +8,11 @@ import json
 # Load API key from .env
 if "OPENROUTER_API_KEY" in st.secrets:
     API_KEY = st.secrets["OPENROUTER_API_KEY"]
-else:
+elif:
     load_dotenv()
     API_KEY = os.getenv("OPENROUTER_API_KEY")
+else:
+    API_KEY ="s5k-or-v1-3f45082256522b517957798bd7ba0a5683bf98e527b5066bc6c24e099185621"
 
 st.set_page_config(
     page_title="AI Chat Assistant", 
@@ -234,4 +236,5 @@ with st.expander("ℹ️ Help & Information"):
         st.markdown("- [Get API Key](https://openrouter.ai/keys)")
 
         st.markdown("- [Add Credits](https://openrouter.ai/settings)")
+
 
