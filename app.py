@@ -6,8 +6,11 @@ import time
 import json
 
 # Load API key from .env
-load_dotenv()
-API_KEY = st.secrets.get("OPENROUTER_API_KEY") or os.getenv("OPENROUTER_API_KEY")
+if "OPENROUTER_API_KEY" in st.secrets:
+    API_KEY = st.secrets["OPENROUTER_API_KEY"]
+else:
+    load_dotenv()
+    API_KEY = os.getenv("OPENROUTER_API_KEY")
 
 st.set_page_config(
     page_title="AI Chat Assistant", 
@@ -231,3 +234,4 @@ with st.expander("ℹ️ Help & Information"):
         st.markdown("- [Get API Key](https://openrouter.ai/keys)")
 
         st.markdown("- [Add Credits](https://openrouter.ai/settings)")
+
